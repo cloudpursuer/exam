@@ -1,0 +1,24 @@
+{
+    "superAdmin": [
+        {
+            "name":"张老师",
+            "account":"12010110000",
+            "password": "password",
+            "position": "superAdmin"
+        }
+    ],
+    "admin": [
+        {
+            "name":"李老师",
+            "account":"12010110001",
+            "password": "password",
+            "position": "admin"
+        },
+        {
+            "name":"王老师",
+            "account":"12010110002",
+            "password": "password",
+            "position": "admin"
+        }
+    ]
+}
