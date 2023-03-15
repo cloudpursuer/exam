@@ -17,6 +17,7 @@ func InitRouter() *gin.Engine {
 	//v1版本
 	V1 := r.Group("/v1")
 	initAdminRouter(V1)
+	initStudentRouter(V1)
 
 	return r
 }
@@ -26,5 +27,12 @@ func initAdminRouter(V1 *gin.RouterGroup) {
 	{
 		// 管理员登录
 		admin.POST("/login", v1.AdminLogin)
+	}
+}
+
+func initStudentRouter(V1 *gin.RouterGroup) {
+	student := V1.Group("/student")
+	{
+		student.POST("/login", v1.StudentLogin)
 	}
 }

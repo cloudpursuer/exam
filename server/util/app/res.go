@@ -17,6 +17,11 @@ type Response struct {
 	Data interface{} `json:"data"`
 }
 
+type LoginData struct {
+	Token    interface{} `json:"token"`
+	Position interface{} `json:"position"`
+}
+
 func (g *Gin) Response(httpCode int, errMsg string, data interface{}) {
 	g.Ctx.JSON(httpCode, Response{
 		Code: httpCode,
@@ -26,11 +31,23 @@ func (g *Gin) Response(httpCode int, errMsg string, data interface{}) {
 	return
 }
 
-func (g *Gin) SuccessResponse(data interface{}) {
+func (g *Gin) SuccessResponse(data ...interface{}) {
 	g.Ctx.JSON(http.StatusOK, Response{
 		Code: http.StatusOK,
 		Msg:  "成功",
 		Data: data,
+	})
+	return
+}
+
+func (g *Gin) LoginSuccessResponse(token interface{}, position interface{}) {
+	g.Ctx.JSON(http.StatusOK, Response{
+		Code: http.StatusOK,
+		Msg:  "成功",
+		Data: LoginData{
+			Token:    token,
+			Position: position,
+		},
 	})
 	return
 }

@@ -7,15 +7,15 @@ import (
 )
 
 // 生成管理员token
-func GenerateToken(account string, password string) (interface{}, error) {
+func GenerateToken(account string, password string) (interface{}, interface{}, error) {
 	var admin admin_model.AdminItem
 	var token string
 	admin, err := admin_model.GetAdminInfo(account)
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	if admin.Password != sign.EncodeMD5(password) {
-		return nil, errors.BadError("密码错误")
+		return nil, nil, errors.BadError("密码错误")
 	}
 	switch admin.Position {
 	case "admin":
@@ -24,7 +24,7 @@ func GenerateToken(account string, password string) (interface{}, error) {
 		token, err = sign.GenToken(account, account, sign.AdminClaimsType)
 	}
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
-	return map[string]interface{}{"token": token, "account": admin.Account}, nil
+	return token, admin.Position, nil
 }

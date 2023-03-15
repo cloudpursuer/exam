@@ -16,6 +16,8 @@ type Student struct {
 	Grade     string `json:"grade"`
 	Specialty string `json:"specialty"`
 	Class     string `json:"class"`
+	//Exam      []string `json:"exam"`
+	//Points    []string `json:"points"`
 }
 
 // 批量添加学生信息

@@ -1,0 +1,6 @@
+POST http://127.0.0.1:8080/v1/admin/login HTTP/1.1
+
+{
+    "account":"12010110001",
+    "password":"password"
+}
