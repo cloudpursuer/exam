@@ -25,7 +25,7 @@ func GenToken(account string, issuer string, claimsType ClaimsType, minute ...in
 	if len(minute) > 0 {
 		expireTime = nowTime.Add(time.Duration(minute[0]) * time.Minute)
 	} else {
-		expireTime = nowTime.Add(8 * time.Hour)
+		expireTime = nowTime.Add(7 * 24 * time.Hour)
 	}
 	claims := Claims{
 		claimsType,

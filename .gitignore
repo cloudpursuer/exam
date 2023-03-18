@@ -27,3 +27,4 @@ yarn-error.log*
 *exe~
 /tmp/
 .vscode
+.http

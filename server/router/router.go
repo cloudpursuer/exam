@@ -18,6 +18,7 @@ func InitRouter() *gin.Engine {
 	V1 := r.Group("/v1")
 	initAdminRouter(V1)
 	initStudentRouter(V1)
+	initExamRouter(V1)
 
 	return r
 }
@@ -34,5 +35,12 @@ func initStudentRouter(V1 *gin.RouterGroup) {
 	student := V1.Group("/student")
 	{
 		student.POST("/login", v1.StudentLogin)
+	}
+}
+func initExamRouter(V1 *gin.RouterGroup) {
+	exam := V1.Group("/exam")
+	{
+		exam.GET("/recent", v1.StudentLogin)
+		exam.POST("/addone", v1.AddOneExam)
 	}
 }

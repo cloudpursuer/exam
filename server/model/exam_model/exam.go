@@ -10,19 +10,24 @@ import (
 var ExamColl *qmgo.Collection
 
 type Exam struct {
-	ID        string   `json:"id"`
-	Name      string   `json:"name"`
-	StartTime string   `json:"start-time"`
-	Duration  string   `json:"duration"`
-	Date      string   `json:"date"`
-	Position  string   `json:"position"`
-	Number    string   `json:"number"`
-	Grade     string   `json:"grade"`
-	Specialty string   `json:"specialty"`
-	Class     string   `json:"class"`
-	Organizer string   `json:"organizer"` //承办单位，xx教研室
-	Content   []string `json:"content"`
+	ID        string        `json:"id"`
+	Name      string        `json:"name"`
+	StartTime string        `json:"start-time"`
+	Duration  string        `json:"duration"`
+	Date      string        `json:"date"`
+	Position  string        `json:"position"`
+	Number    string        `json:"number"`
+	Grade     string        `json:"grade"`
+	Specialty string        `json:"specialty"`
+	Class     []string      `json:"class"`
+	Organizer string        `json:"organizer"` //承办单位，xx教研室
+	Content   []interface{} `json:"content"`
 }
+
+// type choiceQuestion struct {
+// 	title  string
+// 	choice []string
+// }
 
 // 获取所有考试
 func GetAllEXamInfo() ([]Exam, error) {

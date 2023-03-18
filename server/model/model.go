@@ -5,6 +5,7 @@ import (
 
 	"log"
 	"server/model/admin_model"
+	"server/model/exam_model"
 
 	"github.com/qiniu/qmgo"
 )
@@ -21,6 +22,7 @@ func Init() {
 	}
 	db := client.Database("exam")
 	admin_model.AdminColl = db.Collection("admin")
+	exam_model.ExamColl = db.Collection("exam")
 	//loadAdmin(admin_model.AdminColl)
 	//loadAdmin(user_model.UserColl)
 	//defer DBClose()
