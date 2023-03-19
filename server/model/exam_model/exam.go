@@ -2,6 +2,8 @@ package exam_model
 
 import (
 	"context"
+	"strconv"
+	"time"
 
 	"github.com/qiniu/qmgo"
 	"go.mongodb.org/mongo-driver/bson"
@@ -14,7 +16,8 @@ type Exam struct {
 	Name      string        `json:"name"`
 	StartTime string        `json:"start-time"`
 	Duration  string        `json:"duration"`
-	Date      string        `json:"date"`
+	Day       string        `json:"day"`
+	Month     string        `json:"month"`
 	Position  string        `json:"position"`
 	Number    string        `json:"number"`
 	Grade     string        `json:"grade"`
@@ -34,6 +37,23 @@ func GetAllEXamInfo() ([]Exam, error) {
 	Info := []Exam{}
 	filter := bson.M{}
 	err := ExamColl.Find(context.Background(), filter).All(&Info)
+	if err != nil {
+		return Info, err
+	} else {
+		return Info, err
+	}
+}
+
+// 获取某天的考试的部分信息
+func GetRecentExam() ([]string, error) {
+	var Info []string
+	_, month, day := time.Now().Date()
+	Exams := []Exam{}
+	filter := bson.M{"day": strconv.Itoa(day), "month": strconv.Itoa(int(month))}
+	err := ExamColl.Find(context.Background(), filter).All(&Exams)
+	for _, value := range Exams {
+		Info = append(Info, value.Name)
+	}
 	if err != nil {
 		return Info, err
 	} else {

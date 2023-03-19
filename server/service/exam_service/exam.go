@@ -7,7 +7,7 @@ import (
 
 // 添加一个考试
 func AddOneExam(
-	name string, startTime string, duration string, date string,
+	name string, startTime string, duration string, day string, month string,
 	position string, nubmer string, grade string, specialty string,
 	class []string, organizer string, content []interface{}) error {
 	exam := exam_model.Exam{
@@ -15,7 +15,8 @@ func AddOneExam(
 		Name:      name,
 		StartTime: startTime,
 		Duration:  duration,
-		Date:      date,
+		Day:       day,
+		Month:     month,
 		Position:  position,
 		Number:    nubmer,
 		Grade:     grade,

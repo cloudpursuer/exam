@@ -7,6 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
+import { useGetRecentExamQuery } from '../store/examApi';
 
 
 const theme = createTheme();
@@ -14,10 +15,12 @@ const theme = createTheme();
 export default function Exam() {
 
     const [course, setCourse] = React.useState('');
+    //@ts-ignore
+    const { data, isFetching, isSuccess } = useGetRecentExamQuery()
 
     const handleChange = (event: SelectChangeEvent) => {
-    setCourse(event.target.value as string);
-  };
+        setCourse(event.target.value as string);
+    };
 
     return (
         <ThemeProvider theme={theme}>
@@ -31,10 +34,12 @@ export default function Exam() {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography component="h1" variant="h5">
-                        请选择考试科目
-                    </Typography>
-                        <FormControl fullWidth sx={{marginTop:8}}>
+                    {isFetching && <TextField>数据正在加载</TextField>}
+                    {isSuccess && <>
+                        <Typography component="h1" variant="h5">
+                            请选择考试科目
+                        </Typography>
+                        <FormControl fullWidth sx={{ marginTop: 8 }}>
                             <InputLabel id="course-select-label">考试科目</InputLabel>
                             <Select
                                 labelId="course-select-label"
@@ -43,20 +48,21 @@ export default function Exam() {
                                 label="Course"
                                 onChange={handleChange}
                             >
-                                <MenuItem value={10}>局部解剖学</MenuItem>
-                                <MenuItem value={20}>高等数学</MenuItem>
-                                <MenuItem value={30}>中国近代史纲要</MenuItem>
+                                {//@ts-ignore
+                                    data.data.map((item,index) => <MenuItem value={index}>{item}</MenuItem>)
+                                }
                             </Select>
                         </FormControl>
-                        <Button
-                            type="submit"
-                            fullWidth
-                            variant="contained"
-                            sx={{ mt: 4, mb: 2 }}
-                        >
-                            进入考试
-                        </Button>
-                    </Box>
+                    </>}
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 4, mb: 2 }}
+                    >
+                        进入考试
+                    </Button>
+                </Box>
             </Container>
         </ThemeProvider>
     );

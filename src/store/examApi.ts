@@ -9,10 +9,7 @@ const examApi = createApi({
         return {
             getRecentExam:build.query({
                 query(){
-                    return{
-                        url:'recent',
-                        method:'get',
-                    }
+                    return 'recent'
                 }
             }),
             getAllExam:build.mutation({

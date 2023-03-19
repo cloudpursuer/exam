@@ -40,7 +40,7 @@ func initStudentRouter(V1 *gin.RouterGroup) {
 func initExamRouter(V1 *gin.RouterGroup) {
 	exam := V1.Group("/exam")
 	{
-		exam.GET("/recent", v1.StudentLogin)
+		exam.GET("/recent", v1.GetTodayExam)
 		exam.POST("/addone", v1.AddOneExam)
 	}
 }
