@@ -10,7 +10,7 @@ POST http://127.0.0.1:8080/v1/exam/addone HTTP/1.1
  	"name":"中国近代史",         
  	"start-time":"9：00",    
  	"duration":"100",     
- 	"day":"21",
+ 	"day":"19",
     "month":"3",         
  	"position":"理论楼201",     
  	"number":"123",      
@@ -24,3 +24,19 @@ POST http://127.0.0.1:8080/v1/exam/addone HTTP/1.1
 }
 ###
 Get http://127.0.0.1:8080/v1/exam/recent HTTP/1.1
+###
+Get http://127.0.0.1:8080/v1/exam/list HTTP/1.1
+###
+Post http://127.0.0.1:8080/v1/exam/content HTTP/1.1
+
+{
+	"id":"AbzvMhS46KCNTeLl6UV2XR0szKxaUjIm"
+}
+###
+Post http://127.0.0.1:8080/v1/exam/delone HTTP/1.1
+
+{
+	"id":"AbzvMhS46KCNTeLl6UV2XR0szKxaUjIm"
+}
+
+

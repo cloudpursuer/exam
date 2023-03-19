@@ -33,3 +33,48 @@ func GetTodayExam(c *gin.Context) {
 	}
 	appG.SuccessResponse(examArr)
 }
+
+// 获取所有考试列表
+func GetAllExamList(c *gin.Context) {
+	appG := app.Gin{Ctx: c}
+	examlist, err := exam_service.GetExamList()
+	if err != nil {
+		appG.BadResponse("出错了")
+		return
+	}
+	appG.SuccessResponse(examlist)
+}
+
+// 获取考试内容
+type getContentBody struct {
+	Id string `json:"id"`
+}
+
+func GetExamContent(c *gin.Context) {
+	appG := app.Gin{Ctx: c}
+	var body getContentBody
+	if !appG.ParseJSONRequest(&body) {
+		return
+	}
+	content, err := exam_service.GetExamContent(body.Id)
+	if err != nil {
+		appG.BadResponse("出错了")
+		return
+	}
+	appG.SuccessResponse(content)
+}
+
+// 删除考试
+func DelExam(c *gin.Context) {
+	appG := app.Gin{Ctx: c}
+	var body getContentBody
+	if !appG.ParseJSONRequest(&body) {
+		return
+	}
+	err := exam_model.DelExam(body.Id)
+	if err != nil {
+		appG.BadResponse("出错了")
+		return
+	}
+	appG.SuccessResponse("考试删除")
+}

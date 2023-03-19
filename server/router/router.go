@@ -2,6 +2,8 @@ package router
 
 import (
 	v1 "server/controller/v1"
+	"server/middleware"
+	"server/util/sign"
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
@@ -42,5 +44,8 @@ func initExamRouter(V1 *gin.RouterGroup) {
 	{
 		exam.GET("/recent", v1.GetTodayExam)
 		exam.POST("/addone", v1.AddOneExam)
+		exam.GET("/list", v1.GetAllExamList)
+		exam.POST("content", v1.GetExamContent)
+		exam.POST("delone", middleware.JWT(sign.AdminClaimsType), v1.DelExam)
 	}
 }

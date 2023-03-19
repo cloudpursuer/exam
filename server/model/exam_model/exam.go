@@ -38,9 +38,9 @@ func GetAllEXamInfo() ([]Exam, error) {
 	filter := bson.M{}
 	err := ExamColl.Find(context.Background(), filter).All(&Info)
 	if err != nil {
-		return Info, err
+		return nil, err
 	} else {
-		return Info, err
+		return Info, nil
 	}
 }
 
@@ -58,6 +58,18 @@ func GetRecentExam() ([]string, error) {
 		return Info, err
 	} else {
 		return Info, err
+	}
+}
+
+// 根据考试id获取考试信息
+func GetExamContent(id string) (Exam, error) {
+	Info := Exam{}
+	filter := bson.M{"id": id}
+	err := ExamColl.Find(context.Background(), filter).One(&Info)
+	if err != nil {
+		return Info, err
+	} else {
+		return Info, nil
 	}
 }
 
