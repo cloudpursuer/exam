@@ -26,5 +26,6 @@ func GenerateToken(account string, password string) (interface{}, interface{}, e
 	if err != nil {
 		return nil, nil, err
 	}
+
 	return token, admin.Position, nil
 }

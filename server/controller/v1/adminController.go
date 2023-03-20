@@ -23,5 +23,5 @@ func AdminLogin(c *gin.Context) {
 	if appG.HasError(err) {
 		return
 	}
-	appG.LoginSuccessResponse(token, position)
+	appG.AdminLoginSuccessResponse(token, position)
 }

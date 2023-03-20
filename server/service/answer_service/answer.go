@@ -27,3 +27,13 @@ func GetAnswerBySpecialty(specialty string) ([]answer_model.Answer, error) {
 		return answerList, nil
 	}
 }
+
+// 提交答案
+func SubmitAnswer(answer answer_model.Answer) error {
+	err := answer_model.Submit(answer)
+	if err != nil {
+		return err
+	} else {
+		return nil
+	}
+}

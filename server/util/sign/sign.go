@@ -9,8 +9,9 @@ import (
 type ClaimsType string
 
 const (
-	AdminClaimsType      ClaimsType = "admin-claims-type" //管理员用户
-	SuperAdminClaimsType ClaimsType = "super-claims-type" //超级管理员用户
+	AdminClaimsType      ClaimsType = "admin-claims-type"   //管理员用户
+	SuperAdminClaimsType ClaimsType = "super-claims-type"   //超级管理员用户
+	StudentClaimsType    ClaimsType = "student-claims-type" //学生用户
 )
 const secret = "asdadfadassdsadass"
 

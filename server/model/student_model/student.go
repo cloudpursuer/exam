@@ -23,20 +23,32 @@ type Student struct {
 // 批量添加学生信息
 func AddManyStudentInfo(studentList []Student) error {
 	_, err := StudentColl.InsertMany(context.Background(), studentList)
-	return err
+	if err != nil {
+		return err
+	} else {
+		return nil
+	}
 }
 
 // 根据学号删除学生信息
 func DelOneStudentInfo(id string) error {
 	filter := bson.M{"id": id}
 	err := StudentColl.Remove(context.Background(), filter)
-	return err
+	if err != nil {
+		return err
+	} else {
+		return nil
+	}
 }
 
 // 根据学号查找学生信息
-func FindStudentInfo(id string) error {
+func FindStudentInfo(id string) (Student, error) {
 	one := Student{}
 	filter := bson.M{"id": id}
 	err := StudentColl.Find(context.Background(), filter).One(&one)
-	return err
+	if err != nil {
+		return one, err
+	} else {
+		return one, err
+	}
 }

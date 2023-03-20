@@ -21,6 +21,7 @@ func InitRouter() *gin.Engine {
 	initAdminRouter(V1)
 	initStudentRouter(V1)
 	initExamRouter(V1)
+	initAnswerRouter(V1)
 
 	return r
 }
@@ -37,6 +38,7 @@ func initStudentRouter(V1 *gin.RouterGroup) {
 	student := V1.Group("/student")
 	{
 		student.POST("/login", v1.StudentLogin)
+		student.POST("/addmany", v1.AddManyStudentInfo)
 	}
 }
 func initExamRouter(V1 *gin.RouterGroup) {
@@ -47,5 +49,11 @@ func initExamRouter(V1 *gin.RouterGroup) {
 		exam.GET("/list", v1.GetAllExamList)
 		exam.POST("content", v1.GetExamContent)
 		exam.POST("delone", middleware.JWT(sign.AdminClaimsType), v1.DelExam)
+	}
+}
+func initAnswerRouter(V1 *gin.RouterGroup) {
+	answer := V1.Group("/answer")
+	{
+		answer.POST("/submit", v1.SubmitAnswer)
 	}
 }

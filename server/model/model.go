@@ -7,6 +7,7 @@ import (
 	"server/model/admin_model"
 	"server/model/answer_model"
 	"server/model/exam_model"
+	"server/model/student_model"
 
 	"github.com/qiniu/qmgo"
 )
@@ -25,6 +26,7 @@ func Init() {
 	admin_model.AdminColl = db.Collection("admin")
 	exam_model.ExamColl = db.Collection("exam")
 	answer_model.AnswerColl = db.Collection("answer")
+	student_model.StudentColl = db.Collection("student")
 	//loadAdmin(admin_model.AdminColl)
 	//loadAdmin(user_model.UserColl)
 	//defer DBClose()

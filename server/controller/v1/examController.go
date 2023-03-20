@@ -76,5 +76,5 @@ func DelExam(c *gin.Context) {
 		appG.BadResponse("出错了")
 		return
 	}
-	appG.SuccessResponse("考试删除")
+	appG.SuccessResponse("考试成功删除")
 }
