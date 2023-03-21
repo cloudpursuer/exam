@@ -53,3 +53,14 @@ func GetAnswer(identifier string) (Answer, error) {
 		return One, nil
 	}
 }
+
+// 更新答案
+func UpdateAnswer(identifier string, newAnswer Answer) error {
+	filter := bson.M{"identifier": identifier}
+	err := AnswerColl.UpdateOne(context.Background(), filter, bson.M{"$set": newAnswer})
+	if err != nil {
+		return err
+	} else {
+		return nil
+	}
+}

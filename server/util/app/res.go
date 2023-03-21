@@ -2,6 +2,7 @@ package app
 
 import (
 	"net/http"
+	"server/model/student_model"
 	"server/util/errors"
 
 	"github.com/gin-gonic/gin"
@@ -22,7 +23,12 @@ type AdminLoginData struct {
 	Position interface{} `json:"position"`
 }
 type StuLoginData struct {
-	Token interface{} `json:"token"`
+	Token     interface{} `json:"token"`
+	ID        string      `json:"id"`
+	Name      string      `json:"name"`
+	Grade     string      `json:"grade"`
+	Specialty string      `json:"specialty"`
+	Class     string      `json:"class"`
 }
 
 func (g *Gin) Response(httpCode int, errMsg string, data interface{}) {
@@ -42,12 +48,17 @@ func (g *Gin) SuccessResponse(data ...interface{}) {
 	})
 	return
 }
-func (g *Gin) StuLoginSuccessResponse(token interface{}) {
+func (g *Gin) StuLoginSuccessResponse(token interface{}, info student_model.Student) {
 	g.Ctx.JSON(http.StatusOK, Response{
 		Code: http.StatusOK,
 		Msg:  "成功",
 		Data: StuLoginData{
-			Token: token,
+			Token:     token,
+			ID:        info.ID,
+			Name:      info.Name,
+			Grade:     info.Grade,
+			Specialty: info.Specialty,
+			Class:     info.Class,
 		},
 	})
 	return

@@ -11,7 +11,7 @@ import (
 // 添加一个考试
 func AddOneExam(c *gin.Context) {
 	appG := app.Gin{Ctx: c}
-	var body exam_model.Exam
+	var body exam_model.ExamT
 	if !appG.ParseJSONRequest(&body) {
 		return
 	}

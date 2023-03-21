@@ -19,11 +19,11 @@ func StudentLogin(c *gin.Context) {
 	if !appG.ParseJSONRequest(&body) {
 		return
 	}
-	token, err := student_service.GenerateToken(body.Account, body.Password)
+	token, student, err := student_service.GenerateToken(body.Account, body.Password)
 	if appG.HasError(err) {
 		return
 	}
-	appG.StuLoginSuccessResponse(token)
+	appG.StuLoginSuccessResponse(token, student)
 }
 
 type AddManyStudentInfoBody struct {

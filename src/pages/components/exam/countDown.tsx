@@ -1,13 +1,18 @@
 import * as React from 'react';
+import { useSelector } from 'react-redux';
 
-interface time {
-    "time": number
-}
 
-export default function CountDown({ time }: time) {
-
+export default function CountDown() {
+    //@ts-ignore
+    let examState= useSelector(state=>state.exam)
+    let time= Number(examState.duration as string)
+    
     const [min, setMin] = React.useState(--time)
     const [sec, setSec] = React.useState(60)
+    
+    React.useEffect(()=>{
+        setMin(time)
+    },[time])
 
     const timer = () => {
         let time = sec

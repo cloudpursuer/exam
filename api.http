@@ -1,4 +1,5 @@
 POST http://127.0.0.1:8080/v1/admin/login HTTP/1.1
+
 {
     "account":"12010110001",
     "password":"password"
@@ -7,10 +8,10 @@ POST http://127.0.0.1:8080/v1/admin/login HTTP/1.1
 POST http://127.0.0.1:8080/v1/exam/addone HTTP/1.1
 
 {    
- 	"name":"中国近代史",         
- 	"start-time":"9：00",    
+ 	"name":"生物化学",         
+ 	"startTime":"9：00",    
  	"duration":"100",     
- 	"day":"19",
+ 	"day":"21",
     "month":"3",         
  	"position":"理论楼201",     
  	"number":"123",      
@@ -19,7 +20,8 @@ POST http://127.0.0.1:8080/v1/exam/addone HTTP/1.1
  	"class":["临床试验1班","口腔1班"],        
  	"organizer":"生物化学教研室",    
  	"content":[
-         {"title":"各种蛋白质平均含氮量约为","choice": ["0.6%", "6%", "16%", "26%", "36%"]}
+        {"type":"choice","title":"各种蛋白质平均含氮量约为","choice": ["0.6%", "6%", "16%", "26%", "36%"]},
+		{"type":"discuss","title":"简述糖酵解的过程"}
     ]
 }
 ###
@@ -30,13 +32,54 @@ Get http://127.0.0.1:8080/v1/exam/list HTTP/1.1
 Post http://127.0.0.1:8080/v1/exam/content HTTP/1.1
 
 {
-	"id":"AbzvMhS46KCNTeLl6UV2XR0szKxaUjIm"
+	"id":"SbHtNXklsmOB69cXKnZKsORIBJHMAhJY"
 }
 ###
 Post http://127.0.0.1:8080/v1/exam/delone HTTP/1.1
 
 {
-	"id":"AbzvMhS46KCNTeLl6UV2XR0szKxaUjIm"
+	"id":"SbHtNXklsmOB69cXKnZKsORIBJHMAhJY"
 }
+###
+Post http://127.0.0.1:8080/v1/student/addmany HTTP/1.1
 
+{
+	"student-list":[
+		{
+			"id":"13010110001",
+			"name":"张三",
+			"password":"password",
+			"grade":"2021",
+			"specialty":"物联网工程",
+			"class":"1班"
+		},
+		{
+			"id":"13010110002",
+			"name":"李四",
+			"password":"password",
+			"grade":"2021",
+			"specialty":"临床医学",
+			"class":"2班"
+		}
+	]
+}
+###
+Post http://127.0.0.1:8080/v1/student/login HTTP/1.1
 
+{
+	"account":"13010110001",
+    "password":"password"
+}
+###
+Post http://127.0.0.1:8080/v1/answer/submit HTTP/1.1
+
+{	
+	"identifier":"TeLl6UV2XR0szKxaUjIm",
+	"id":"13010110002",
+	"name":"李四",
+	"grade":"2021",
+	"specialty":"临床医学",
+	"class":"2班",
+	"organizer":"生物化学教研室",
+	"content":["B"]
+}

@@ -1,13 +1,12 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/dist/query/react'
 
-const examApi = createApi({
-    reducerPath: 'examApi',
+const answerApi = createApi({
+    reducerPath: 'answerApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:8080/v1/exam'
+        baseUrl: 'http://localhost:8080/v1/answer'
     }),
     endpoints(build){
         return {
-            
             getRecentExam:build.query({
                 query(){
                     return 'recent'
@@ -17,15 +16,6 @@ const examApi = createApi({
                 query(body){
                     return{
                         url:'all',
-                        method:'post',
-                        body
-                    }
-                }
-            }),
-            getExamContent:build.mutation({
-                query(body){
-                    return{
-                        url:'content',
                         method:'post',
                         body
                     }
@@ -72,11 +62,10 @@ const examApi = createApi({
 })
 
 export const { useAddOneExamMutation,
-    useGetExamContentMutation,
     useGetAllExamMutation,
     useGetRecentExamQuery,
     useDelOneExamMutation,
     useMutExamInfoMutation,
     useSubmitExamMutation
-} = examApi
-export default examApi
+} = answerApi
+export default answerApi

@@ -10,7 +10,7 @@ func AddOneExam(
 	name string, startTime string, duration string, day string, month string,
 	position string, nubmer string, grade string, specialty string,
 	class []string, organizer string, content []interface{}) error {
-	exam := exam_model.Exam{
+	exam := exam_model.ExamT{
 		ID:        random.String(32),
 		Name:      name,
 		StartTime: startTime,
@@ -73,11 +73,11 @@ func GetExamList() ([]ExamInfo, error) {
 		return examlist, nil
 	}
 }
-func GetExamContent(id string) ([]interface{}, error) {
+func GetExamContent(id string) (exam_model.Exam, error) {
 	exam, err := exam_model.GetExamContent(id)
 	if err != nil {
-		return nil, err
+		return exam, err
 	} else {
-		return exam.Content, nil
+		return exam, nil
 	}
 }

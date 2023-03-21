@@ -6,21 +6,20 @@ import (
 	"server/util/sign"
 )
 
-func GenerateToken(account string, password string) (interface{}, error) {
-	var student student_model.Student
+func GenerateToken(account string, password string) (interface{}, student_model.Student, error) {
 	var token string
 	student, err := student_model.FindStudentInfo(account)
 	if err != nil {
-		return nil, errors.BadError("密码错误")
+		return nil, student, errors.BadError("密码错误")
 	}
 	if student.Password != sign.EncodeMD5(password) {
-		return nil, err
+		return nil, student, err
 	}
 	token, err = sign.GenToken(account, account, sign.StudentClaimsType)
 	if err != nil {
-		return nil, err
+		return nil, student, err
 	}
-	return token, nil
+	return token, student, nil
 }
 func HashStudentPassword(student student_model.Student) student_model.Student {
 	var newStudent student_model.Student

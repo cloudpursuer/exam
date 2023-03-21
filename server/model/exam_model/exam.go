@@ -12,9 +12,29 @@ import (
 var ExamColl *qmgo.Collection
 
 type Exam struct {
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	StartTime string    `json:"startTime"`
+	Duration  string    `json:"duration"`
+	Day       string    `json:"day"`
+	Month     string    `json:"month"`
+	Position  string    `json:"position"`
+	Number    string    `json:"number"`
+	Grade     string    `json:"grade"`
+	Specialty string    `json:"specialty"`
+	Class     []string  `json:"class"`
+	Organizer string    `json:"organizer"` //承办单位，xx教研室
+	Content   []content `json:"content"`
+}
+type content struct {
+	Type   string      `json:"type"`
+	Title  string      `json:"title"`
+	Choice interface{} `json:"choice"`
+}
+type ExamT struct {
 	ID        string        `json:"id"`
 	Name      string        `json:"name"`
-	StartTime string        `json:"start-time"`
+	StartTime string        `json:"startTime"`
 	Duration  string        `json:"duration"`
 	Day       string        `json:"day"`
 	Month     string        `json:"month"`
@@ -44,20 +64,28 @@ func GetAllEXamInfo() ([]Exam, error) {
 	}
 }
 
+type ExamInfo struct {
+	ID   string `json:"id"`
+	Name string `json:"name"`
+}
+
 // 获取某天的考试的部分信息
-func GetRecentExam() ([]string, error) {
-	var Info []string
+func GetRecentExam() ([]ExamInfo, error) {
+	var Infos []ExamInfo
+	var info ExamInfo
 	_, month, day := time.Now().Date()
 	Exams := []Exam{}
 	filter := bson.M{"day": strconv.Itoa(day), "month": strconv.Itoa(int(month))}
 	err := ExamColl.Find(context.Background(), filter).All(&Exams)
 	for _, value := range Exams {
-		Info = append(Info, value.Name)
+		info.ID = value.ID
+		info.Name = value.Name
+		Infos = append(Infos, info)
 	}
 	if err != nil {
-		return Info, err
+		return Infos, err
 	} else {
-		return Info, err
+		return Infos, err
 	}
 }
 
@@ -74,13 +102,13 @@ func GetExamContent(id string) (Exam, error) {
 }
 
 // 添加一场考试
-func AddOneExam(exam Exam) error {
+func AddOneExam(exam ExamT) error {
 	_, err := ExamColl.InsertOne(context.Background(), exam)
 	return err
 }
 
 // 批量添加考试
-func AddManyEXam(examList []Exam) error {
+func AddManyEXam(examList []ExamT) error {
 	_, err := ExamColl.InsertMany(context.Background(), examList)
 	return err
 }

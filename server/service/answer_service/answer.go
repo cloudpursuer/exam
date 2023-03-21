@@ -30,10 +30,12 @@ func GetAnswerBySpecialty(specialty string) ([]answer_model.Answer, error) {
 
 // 提交答案
 func SubmitAnswer(answer answer_model.Answer) error {
-	err := answer_model.Submit(answer)
+	_, err := answer_model.GetAnswer(answer.Identifier)
 	if err != nil {
+		err := answer_model.Submit(answer)
 		return err
 	} else {
-		return nil
+		err := answer_model.UpdateAnswer(answer.Identifier, answer)
+		return err
 	}
 }

@@ -37,7 +37,7 @@ export default function SignIn() {
       }
     ).then((res) => {
       if (res.data.code === 200) {
-        if (res.data.data.position === "admin" || "superAdmin") {
+        if (res.data.data.position && (res.data.data.position === "admin" || "superAdmin")) {
           dispatch(adminSlice.actions.login(res.data.data))
           navigate('/management')
         } else {

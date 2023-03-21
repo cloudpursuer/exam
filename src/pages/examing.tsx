@@ -8,8 +8,9 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import {SingleChoiceQuestion,singleChoiceQuestionT} from './components/exam/itemCard';
+import {Question} from './components/exam/itemCard';
 import CountDown from './components/exam/countDown';
+import { useSelector } from 'react-redux';
 
 
 const drawerWidth: number = 240;
@@ -66,12 +67,10 @@ const mdTheme = createTheme();
 
 function DashboardContent() {
 
-    const question1: singleChoiceQuestionT = {
-        "title": "各种蛋白质平均含氮量约为",
-        "options": ["0.6%", "6%", "16%", "26%", "36%"]
-    }
-
-    const time = 100
+    //@ts-ignore
+    const examState=useSelector(state=>state.exam)
+    //@ts-ignore
+    const stuState = useSelector(state=>state.stu)
 
     return (
         <ThemeProvider theme={mdTheme}>
@@ -90,7 +89,7 @@ function DashboardContent() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            <CountDown time={time} /> 
+                            <CountDown /> 
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -114,7 +113,7 @@ function DashboardContent() {
                             marginTop={0}
                             sx={{ flexGrow: 1 }}
                         >
-                            姓名：张三
+                            姓名：{stuState.name}
                         </Typography>
                         <Typography
                             component="h1"
@@ -124,7 +123,7 @@ function DashboardContent() {
                             marginTop={2}
                             sx={{ flexGrow: 1 }}
                         >
-                            学号：12010110086
+                            学号：{stuState.id}
                         </Typography>
                         <Typography
                             component="h1"
@@ -134,7 +133,7 @@ function DashboardContent() {
                             marginTop={2}
                             sx={{ flexGrow: 1 }}
                         >
-                            科目：生物化学
+                            科目：{examState.name}
                         </Typography>
                     </List>
                 </Drawer>
@@ -151,8 +150,10 @@ function DashboardContent() {
                     }}
                 >
                     <Toolbar />
-                    {/*题目 */}
-                    <SingleChoiceQuestion title={question1.title} options={question1.options}/>
+                    {
+                        //@ts-ignore
+                        examState.content && examState.content.map((item,index)=>{return <Question title={item.title} options={item.choice} number={index+1}/>}) 
+                    }
                 </Box>
             </Box>
         </ThemeProvider>

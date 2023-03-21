@@ -9,20 +9,23 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
+import TextField from '@mui/material/TextField/TextField';
 
-export interface singleChoiceQuestionT {
+export interface QuestionT {
+    "number":number,
     "title": string,
-    "options": [string, string, string, string, string | null]
+    "options": string[]|null
 }
 
-export function SingleChoiceQuestion(props:singleChoiceQuestionT) {
+export function Question(props:QuestionT) {
 
-    return (
-        <Card sx={{ minWidth: 275, marginTop: 2, marginLeft: 5, marginRight: 5 }}>
+    if(props.options){
+        return(
+            <Card sx={{ minWidth: 275, marginTop: 2, marginLeft: 5, marginRight: 5 }}>
 
             <CardContent>
                 <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-                    第 1 题
+                    第 {props.number} 题
                 </Typography>
                 <Typography variant="h6" component="div">
                     {props.title}
@@ -35,15 +38,33 @@ export function SingleChoiceQuestion(props:singleChoiceQuestionT) {
                         defaultValue="none"
                         name="radio-buttons-group"
                     >
-                        {props.options.map((item, index) => {
+                        {props.options?.map((item, index) => {
                             return (<FormControlLabel value={index} control={<Radio />} label={item} key={index} />)
                         })}
                     </RadioGroup>
                 </FormControl>
             </CardContent>
             <CardActions>
-                <Button size="small" variant='outlined'>保存</Button>
+                <Button size="small" variant='outlined' sx={{marginLeft:1}}>保存</Button>
             </CardActions>
         </Card>
-    );
+        )
+    }else{
+        return(
+            <Card sx={{ minWidth: 275, marginTop: 2, marginLeft: 5, marginRight: 5 }}>
+            <CardContent>
+                <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+                    第 {props.number} 题
+                </Typography>
+                <Typography variant="h6" component="div">
+                    {props.title}
+                </Typography>
+                <TextField size='medium' multiline rows={5} fullWidth />
+            <CardActions>
+                <Button size="small" variant='outlined' sx={{marginBottom:-3,marginLeft:-1}} >保存</Button>
+            </CardActions>
+            </CardContent>
+        </Card>
+        )
+    }
 }
