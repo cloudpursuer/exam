@@ -8,9 +8,14 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
-import {Question} from './components/exam/itemCard';
+import { Question } from './components/exam/itemCard';
 import CountDown from './components/exam/countDown';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import Button from '@mui/material/Button';
+import { answerSlice } from '../store/slice/answerSlice';
+import { useSubmitExamMutation } from '../store/api/answerApi';
+import { Alert } from '@mui/material';
+import Alerts from './components/alert';
 
 
 const drawerWidth: number = 240;
@@ -68,9 +73,26 @@ const mdTheme = createTheme();
 function DashboardContent() {
 
     //@ts-ignore
-    const examState=useSelector(state=>state.exam)
+    const examState = useSelector(state => state.exam)
     //@ts-ignore
-    const stuState = useSelector(state=>state.stu)
+    const stuState = useSelector(state => state.stu)
+    //@ts-ignore
+    const ansState = useSelector(state => state.answer)
+    const [alert,setAlert]=React.useState(false)
+    const dispatch = useDispatch()
+    const [submit] = useSubmitExamMutation()
+    const answerState = {
+        identifier: examState.id,
+        id: stuState.id,
+        name: stuState.name,
+        grade: stuState.grade,
+        specialty: stuState.specialty,
+        class: stuState.class,
+        organizer: examState.organizer
+    }
+    React.useEffect(() => {
+        dispatch(answerSlice.actions.init(answerState))
+    }, [examState.id])
 
     return (
         <ThemeProvider theme={mdTheme}>
@@ -82,6 +104,7 @@ function DashboardContent() {
                             pr: '24px', // keep right padding when drawer closed
                         }}
                     >
+
                         <Typography
                             component="h1"
                             variant="h6"
@@ -89,7 +112,23 @@ function DashboardContent() {
                             noWrap
                             sx={{ flexGrow: 1 }}
                         >
-                            <CountDown /> 
+                            <CountDown />
+                        </Typography>
+                        <Typography
+                            component="h1"
+                            variant="h6"
+                            color="inherit"
+                            noWrap
+                            sx={{ flexGrow: 1 }}
+                        >
+                            <Button
+                                color="inherit" variant="text" size='large'
+                                onClick={() => {
+                                    submit(ansState).then((res) => {
+                                        //@ts-ignore
+                                        if (res.data.code === 200) {window.alert("提交成功")}else{{setAlert(!alert)}}
+                                    })
+                                }}>提交</Button>
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -150,9 +189,10 @@ function DashboardContent() {
                     }}
                 >
                     <Toolbar />
+                    {alert? <Alerts setAlert={setAlert} severity='error' children="提交失败" />:null}
                     {
                         //@ts-ignore
-                        examState.content && examState.content.map((item,index)=>{return <Question title={item.title} options={item.choice} number={index+1}/>}) 
+                        examState.content && examState.content.map((item, index) => { return <Question key={index} title={item.title} options={item.choice} number={index + 1} /> })
                     }
                 </Box>
             </Box>

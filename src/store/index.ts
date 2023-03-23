@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit"
-import { adminSlice } from "./adminSlice";
-import adminApi from "./adminApi";
-import studentApi from "./studentApi";
-import { stuSlice } from "./stuSlice";
-import examApi from "./examApi";
-import { answerSlice } from "./answerSlice";
-import { examSlice } from "./examSlice";
-import answerApi from "./answerApi";
+import { adminSlice } from "./slice/adminSlice";
+import adminApi from "./api/adminApi";
+import studentApi from "./api/studentApi";
+import { stuSlice } from "./slice/stuSlice";
+import examApi from "./api/examApi";
+import { answerSlice } from "./slice/answerSlice";
+import { examSlice } from "./slice/examSlice";
+import answerApi from "./api/answerApi";
 
 const store = configureStore({
     reducer: {

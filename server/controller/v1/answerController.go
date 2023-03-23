@@ -9,12 +9,14 @@ import (
 )
 
 type AnswerSubmitBody struct {
-	ID        string        `json:"id" validate:"required"`
-	Name      string        `json:"name" validate:"required"`
-	Grade     string        `json:"grade" validate:"required"`
-	Specialty string        `json:"specialty" validate:"required"`
-	Organizer string        `json:"organizer" validate:"required"`
-	Content   []interface{} `json:"content" validate:"required"`
+	Identifier string        `json:"identifier" validate:"required"`
+	ID         string        `json:"id" validate:"required"`
+	Name       string        `json:"name" validate:"required"`
+	Grade      string        `json:"grade" validate:"required"`
+	Class      string        `json:"class" validate:"required"`
+	Specialty  string        `json:"specialty" validate:"required"`
+	Organizer  string        `json:"organizer" validate:"required"`
+	Content    []interface{} `json:"content" validate:"required"`
 }
 
 // 提交答案
@@ -25,12 +27,14 @@ func SubmitAnswer(c *gin.Context) {
 		return
 	}
 	var answer answer_model.Answer
+	answer.Identifier = body.Identifier
 	answer.ID = body.ID
 	answer.Name = body.Name
 	answer.Grade = body.Grade
 	answer.Specialty = body.Specialty
 	answer.Organizer = body.Organizer
 	answer.Content = body.Content
+	answer.Class = body.Class
 	err := answer_service.SubmitAnswer(answer)
 	if appG.HasError(err) {
 		return

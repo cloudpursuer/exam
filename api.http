@@ -11,7 +11,7 @@ POST http://127.0.0.1:8080/v1/exam/addone HTTP/1.1
  	"name":"生物化学",         
  	"startTime":"9：00",    
  	"duration":"100",     
- 	"day":"21",
+ 	"day":"23",
     "month":"3",         
  	"position":"理论楼201",     
  	"number":"123",      
@@ -81,5 +81,5 @@ Post http://127.0.0.1:8080/v1/answer/submit HTTP/1.1
 	"specialty":"临床医学",
 	"class":"2班",
 	"organizer":"生物化学教研室",
-	"content":["B"]
+	"content":[{"num":1,"ans":"C"}]
 }

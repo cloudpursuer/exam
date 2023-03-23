@@ -8,9 +8,9 @@ import { useNavigate } from 'react-router-dom'
 import Alerts from './components/alert';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import { adminSlice } from '../store/adminSlice';
+import { adminSlice } from '../store/slice/adminSlice';
 import { useDispatch } from 'react-redux';
-import { stuSlice } from '../store/stuSlice';
+import { stuSlice } from '../store/slice/stuSlice';
 
 const theme = createTheme();
 
@@ -98,7 +98,7 @@ export default function SignIn() {
             >
               登录
             </Button>
-            {alert ? <Alerts setAlert={setAlert} children="请检查账号或密码" /> : null}
+            {alert ? <Alerts setAlert={setAlert} severity='error' children="请检查账号或密码" /> : null}
           </Box>
         </Box>
       </Container>

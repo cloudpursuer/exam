@@ -6,9 +6,9 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
-import { useGetExamContentMutation, useGetRecentExamQuery } from '../store/examApi';
+import { useGetExamContentMutation, useGetRecentExamQuery } from '../store/api/examApi';
 import { useDispatch } from 'react-redux';
-import { examSlice } from '../store/examSlice';
+import { examSlice } from '../store/slice/examSlice';
 import { useNavigate } from 'react-router-dom';
 import SimpleBackdrop from './components/backdrop';
 

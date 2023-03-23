@@ -5,17 +5,17 @@ import Stack from '@mui/material/Stack';
 
 interface Iprops {
     setAlert:(argu0:boolean)=>void
+    severity:"error"|"warning"|"info"|"success"
     children:string
 }
 
 type ComponentProps = React.PropsWithChildren<{children: string}>;
 
-const Alerts =(action:Iprops,{children}:ComponentProps)=> {
+const Alerts =(e:Iprops,{children}:ComponentProps)=> {
   return (
     <Stack sx={{ width: '100%',zIndex:100 }}>
-      <Alert onClose={()=>{action.setAlert(false)}} severity="error">
-        <AlertTitle>出错了</AlertTitle>
-        {children}
+      <Alert onClose={()=>{e.setAlert(false)}} severity={e.severity}>
+        <AlertTitle>{children}</AlertTitle>
       </Alert>
     </Stack>
   );

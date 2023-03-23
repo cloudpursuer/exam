@@ -14,7 +14,7 @@ export const answerSlice = createSlice({
             specialty:"",
             class:"",
             organizer:"",
-            content:[]
+            content:[{}]
         }
     },
 
@@ -27,7 +27,13 @@ export const answerSlice = createSlice({
             state.specialty=action.payload.specialty
             state.class=action.payload.class
             state.organizer=action.payload.organizer
-            state.content=action.payload.content
+        },
+        save(state,action){
+            //@ts-ignore
+            state.content = state.content.filter(item=>item.num!=action.payload.num)
+            //@ts-ignore
+            state.content = state.content.filter(item=>item.num!=undefined)
+            state.content.push(action.payload)
         },
         clear(state) {
             state.identifier=""
@@ -37,9 +43,9 @@ export const answerSlice = createSlice({
             state.grade = ""
             state.specialty = ""
             state.organizer=""
-            state.content=[]
+            state.content=[{}]
         }
     }
 })
 
-export const { init,clear } = answerSlice.actions
+export const { init,clear,save } = answerSlice.actions

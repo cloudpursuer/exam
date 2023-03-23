@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { act } from "react-dom/test-utils";
 
 export const examSlice = createSlice({
     
@@ -14,6 +15,7 @@ export const examSlice = createSlice({
             grade:"",
             specialty:"",
             class:"",
+            organizer:"",
             content:[]
         }
     },
@@ -28,6 +30,7 @@ export const examSlice = createSlice({
             state.specialty=action.payload.specialty
             state.class=action.payload.class
             state.content=action.payload.content
+            state.organizer=action.payload.organizer
         },
         clear(state) {
             state.name = ""
@@ -38,6 +41,7 @@ export const examSlice = createSlice({
             state.specialty=""
             state.class = ""
             state.content=[]
+            state.organizer=""
         }
     }
 })
