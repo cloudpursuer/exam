@@ -16,10 +16,10 @@ type Exam struct {
 	Name      string    `json:"name"`
 	StartTime string    `json:"startTime"`
 	Duration  string    `json:"duration"`
-	Day       string    `json:"day"`
-	Month     string    `json:"month"`
+	Day       int       `json:"day"`
+	Month     int       `json:"month"`
 	Position  string    `json:"position"`
-	Number    string    `json:"number"`
+	Number    int       `json:"number"`
 	Grade     string    `json:"grade"`
 	Specialty string    `json:"specialty"`
 	Class     []string  `json:"class"`
@@ -36,10 +36,10 @@ type ExamT struct {
 	Name      string        `json:"name"`
 	StartTime string        `json:"startTime"`
 	Duration  string        `json:"duration"`
-	Day       string        `json:"day"`
-	Month     string        `json:"month"`
+	Day       int           `json:"day"`
+	Month     int           `json:"month"`
 	Position  string        `json:"position"`
-	Number    string        `json:"number"`
+	Number    int           `json:"number"`
 	Grade     string        `json:"grade"`
 	Specialty string        `json:"specialty"`
 	Class     []string      `json:"class"`

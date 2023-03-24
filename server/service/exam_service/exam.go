@@ -7,8 +7,8 @@ import (
 
 // 添加一个考试
 func AddOneExam(
-	name string, startTime string, duration string, day string, month string,
-	position string, nubmer string, grade string, specialty string,
+	name string, startTime string, duration string, day int, month int,
+	position string, nubmer int, grade string, specialty string,
 	class []string, organizer string, content []interface{}) error {
 	exam := exam_model.ExamT{
 		ID:        random.String(32),
@@ -38,10 +38,10 @@ type ExamInfo struct {
 	Name      string
 	StartTime string
 	Duration  string
-	Day       string
-	Month     string
+	Day       int
+	Month     int
 	Position  string
-	Number    string
+	Number    int
 	Grade     string
 	Specialty string
 	Class     []string

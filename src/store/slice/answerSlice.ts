@@ -30,9 +30,9 @@ export const answerSlice = createSlice({
         },
         save(state,action){
             //@ts-ignore
-            state.content = state.content.filter(item=>item.num!=action.payload.num)
+            state.content = state.content.filter(item=>item.num!==action.payload.num)
             //@ts-ignore
-            state.content = state.content.filter(item=>item.num!=undefined)
+            state.content = state.content.filter(item=>item.num!==undefined)
             state.content.push(action.payload)
         },
         clear(state) {

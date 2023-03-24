@@ -9,11 +9,9 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { MainListItems, secondaryListItems } from './components/management/listitems';
 import ExamSituation from './components/management/iterm_content/examSituation';
 import ExamManagement from './components/management/iterm_content/examManagement';
@@ -135,12 +133,7 @@ function DashboardContent() {
               sx={{ flexGrow: 1 }}
             >
               考试管理
-            </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>           
+            </Typography>           
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

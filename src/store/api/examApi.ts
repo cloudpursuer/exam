@@ -13,13 +13,9 @@ const examApi = createApi({
                     return 'recent'
                 }
             }),
-            getAllExam:build.mutation({
-                query(body){
-                    return{
-                        url:'all',
-                        method:'post',
-                        body
-                    }
+            getAllExam:build.query({
+                query(){
+                    return 'list'
                 }
             }),
             getExamContent:build.mutation({
@@ -73,7 +69,7 @@ const examApi = createApi({
 
 export const { useAddOneExamMutation,
     useGetExamContentMutation,
-    useGetAllExamMutation,
+    useGetAllExamQuery,
     useGetRecentExamQuery,
     useDelOneExamMutation,
     useMutExamInfoMutation,

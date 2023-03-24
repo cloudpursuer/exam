@@ -14,7 +14,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '@mui/material/Button';
 import { answerSlice } from '../store/slice/answerSlice';
 import { useSubmitExamMutation } from '../store/api/answerApi';
-import { Alert } from '@mui/material';
 import Alerts from './components/alert';
 
 
